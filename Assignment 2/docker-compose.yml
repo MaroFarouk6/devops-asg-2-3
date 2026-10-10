@@ -7,6 +7,11 @@ services:
       - '8080:80'
     networks:
       - nginx-db
+    deploy:
+      resources:
+        limits:
+          cpus: 1
+          memory: 512M
   
   db:
     container_name: postgres-db
