@@ -1,0 +1,28 @@
+services:
+
+  web-server:
+    container_name: nginx-web
+    image: nginx:alpine
+    ports:
+      - '8080:80'
+    networks:
+      - nginx-db
+  
+  db:
+    container_name: postgres-db
+    image: postgres:17-alpine
+    networks:
+      - nginx-db
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=mysecretpassword
+
+networks:
+  nginx-db:
+    driver: bridge
+
+volumes:
+  db-data:
+
+
